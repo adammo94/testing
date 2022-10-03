@@ -1,14 +1,14 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { Button } from "@mui/material"
+import { useSession, signIn, signOut } from "next-auth/react"
 
-const Home: NextPage = () => {
+export default function Component() {
+  const { data: session } = useSession()
+
   return (
-    <div className={styles.container}>
-      
-    </div>
+    <>
+      <Button onClick={() => session ? signOut() : signIn()}>
+        {session ? 'Sign out' : 'Sign in'}
+      </Button>
+    </>
   )
 }
-
-export default Home

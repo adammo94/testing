@@ -1,15 +1,22 @@
 import React from 'react';
-import {Provider} from 'react-redux';
-import {AppProps} from 'next/app';
-import {wrapper} from '../store/store';
+import { Provider } from 'react-redux';
+import { AppProps } from 'next/app';
+import { wrapper } from '../store/store';
+import { Session } from 'next-auth';
+import { SessionProvider } from "next-auth/react"
 
-const MyApp = ({Component, ...rest}: AppProps) => {
-    const {store, props} = wrapper.useWrappedStore(rest);
-    return (
-        <Provider store={store}>
-            <Component {...props.pageProps} />
-        </Provider>
-    );
+const MyApp = ({
+  Component,
+  pageProps: { session, ...rest }
+}: AppProps<{ session: Session }>) => {
+  const { store } = wrapper.useWrappedStore(rest);
+  return (
+    <SessionProvider session={session}>
+      <Provider store={store}>
+        <Component {...rest} />
+      </Provider>
+    </SessionProvider>
+  );
 };
 
 export default MyApp;
