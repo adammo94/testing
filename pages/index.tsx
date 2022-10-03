@@ -8,7 +8,7 @@ export default function Component() {
 
   return (
     <Button onClick={() => (session ? signOut() : signIn())}>
-      c
+      d
       {session ? 'Sign out' : 'Sign in'}
     </Button>
   );
