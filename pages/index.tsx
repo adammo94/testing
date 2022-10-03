@@ -10,7 +10,6 @@ export default function Component() {
       <Button onClick={() => session ? signOut() : router.push('/login')}>
         {session ? 'Sign out' : 'Sign in'}
       </Button>
-      <button onClick={() => router.push('/login')}>login</button>
     </>
   )
 }
