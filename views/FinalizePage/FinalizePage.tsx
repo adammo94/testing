@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { Button, TextField } from '@mui/material';
 import { FormWrapper } from './FinalizePage.styles';
 import { db } from '../../firebase/config';
+import { useSession } from 'next-auth/react';
 
 
 type Inputs = {
@@ -20,6 +21,7 @@ type Inputs = {
 
 export function FinalizePage() {
   const router = useRouter()
+  const { data: session } = useSession()
 
   const schema = yup.object().shape({
     name: yup.string().required("Imie jest wymagane"),
@@ -37,7 +39,8 @@ export function FinalizePage() {
       name: data.name,
       lastname: data.lastname,
       age: data.age,
-      country: data.country
+      country: data.country,
+      email: session?.user?.email
     });
     router.push('/')
   }
