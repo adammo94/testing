@@ -24,7 +24,6 @@ export default function SignIn({ providers }: LoginProps) {
     }
   }
 
-  console.log(session)
   useEffect(() => {
     if (session) {
       handleSession()
@@ -41,7 +40,7 @@ export default function SignIn({ providers }: LoginProps) {
           Sign in with {provider.name}
         </Button>
       ))}
-      <button onClick={() => signOut()}>sign out</button>
+      <Button onClick={() => signOut()}>sign out</Button>
     </>
   )
 }
