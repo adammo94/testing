@@ -1,0 +1,12 @@
+#!/bin/sh
+# husky
+
+# Created by Husky v4.3.8 (https://github.com/typicode/husky#readme)
+#   At: 3.10.2022, 19:16:42
+#   From: undefined (https://github.com/typicode/husky#readme)
+
+. "$(dirname "$0")/husky.sh"
+
+exec 1> /dev/tty
+
+npx lint-staged
