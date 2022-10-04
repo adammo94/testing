@@ -7,7 +7,6 @@
     "browser": true
   },
   "rules": {
-    "linebreak-style": ["error", "windows"],
     "no-unused-vars": "error",
     "arrow-parens": [
       2,

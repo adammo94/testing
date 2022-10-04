@@ -9,7 +9,7 @@ export default function Component() {
   return (
     <Button onClick={() => (session ? signOut() : signIn())}>
       bacaa
-      {session ? 'Sign out' : 'Sign in'}
+      {session ? 'Sign out' : 'Sign In'}
     </Button>
   );
 }
