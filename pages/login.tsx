@@ -13,6 +13,7 @@ type LoginProps = {
 export default function SignIn({ providers }: LoginProps) {
   const { data: session } = useSession()
   const router = useRouter()
+  console.log(session)
 
   const handleSession = async () => {
     const q = query(collection(db, "users"), where("email", "==", session?.user?.email));
@@ -40,7 +41,6 @@ export default function SignIn({ providers }: LoginProps) {
           Sign in with {provider.name}
         </Button>
       ))}
-      <Button onClick={() => signOut()}>sign out</Button>
     </>
   )
 }
