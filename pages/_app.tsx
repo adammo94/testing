@@ -4,6 +4,7 @@ import { AppProps } from 'next/app';
 import { wrapper } from '../store/store';
 import { Session } from 'next-auth';
 import { SessionProvider } from "next-auth/react"
+import GlobalStyle from 'globalstyles/globalstyles';
 
 const MyApp = ({
   Component,
@@ -13,6 +14,7 @@ const MyApp = ({
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
+        <GlobalStyle/>
         <Component {...rest} />
       </Provider>
     </SessionProvider>
