@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { addDoc, collection } from 'firebase/firestore';
 import { useRouter } from 'next/router'
 import { Button, TextField } from '@mui/material';
-import { FormWrapper, NewTextField, WrapperForm } from './FinalizePage.styles';
+import { Wrapper } from './FinalizePage.styles';
 import { db } from '../../firebase/config';
 import { useSession } from 'next-auth/react';
 
@@ -18,7 +18,6 @@ type Inputs = {
 };
 
 
-
 export function FinalizePage() {
   const router = useRouter()
   const { data: session } = useSession()
@@ -26,7 +25,7 @@ export function FinalizePage() {
   const schema = yup.object().shape({
     name: yup.string().required("Imie jest wymagane"),
     lastname: yup.string().required("Nazwisko jest wymagane"),
-    age: yup.string().required("Wiek jest wymagany"),
+    age: yup.string().required("Wiek jest wymagany").test('name', 'Wiek musi być większy niż 18', val => parseInt(val as string) >= 18),
     country: yup.string().required('Państwo jest wymagane')
   })
 
@@ -46,47 +45,45 @@ export function FinalizePage() {
   }
 
   return (
-    <FormWrapper>
-      <WrapperForm onSubmit={handleSubmit(onSubmit)}>
-        <NewTextField
-          error={!!errors.name?.message}
-          helperText={errors.name?.message}
-          type='text'
-          variant='filled'
-          label='name'
-          {...register("name")}
-        />
-        <NewTextField
-          error={!!errors.lastname?.message}
-          helperText={errors.lastname?.message}
-          type='text'
-          variant='filled'
-          label='lastname'
-          {...register("lastname")}
-        />
-        <NewTextField
-          error={!!errors.age?.message}
-          helperText={errors.age?.message}
-          type='number'
-          variant='filled'
-          label='age'
-          {...register("age")}
-        />
-        <NewTextField
-          error={!!errors.country?.message}
-          helperText={errors.country?.message}
-          type='text'
-          variant='filled'
-          label='country'
-          {...register("country")}
-        />
-        <Button
-          type='submit'
-          variant='contained'
-        >
-          Register
-        </Button>
-      </WrapperForm>
-    </FormWrapper>
+    <Wrapper onSubmit={handleSubmit(onSubmit)}>
+      <TextField
+        error={!!errors.name?.message}
+        helperText={errors.name?.message}
+        type='text'
+        variant='filled'
+        label='name'
+        {...register("name")}
+      />
+      <TextField
+        error={!!errors.lastname?.message}
+        helperText={errors.lastname?.message}
+        type='text'
+        variant='filled'
+        label='lastname'
+        {...register("lastname")}
+      />
+      <TextField
+        error={!!errors.age?.message}
+        helperText={errors.age?.message}
+        type='number'
+        variant='filled'
+        label='age'
+        {...register("age")}
+      />
+      <TextField
+        error={!!errors.country?.message}
+        helperText={errors.country?.message}
+        type='text'
+        variant='filled'
+        label='country'
+        {...register("country")}
+      />
+      <Button
+        type='submit'
+        variant='contained'
+      >
+        Register
+      </Button>
+    </Wrapper>
   )
 }

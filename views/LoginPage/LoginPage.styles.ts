@@ -5,23 +5,19 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
-  background: rgb(238,174,202);
-background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-
+  height: 100%;
+  width: 100%;
+  flex: 1;
 `
 
 export const Window = styled.div`
 text-align: center;
-margin: 10px;
+width: 100%;
+max-width: 500px;
 padding: 80px;
 color: white;
   background-color: rgba(0,0,0,0.7);
   border-radius: 25px;
-
-  @media(min-width: 768px){
-  width: 500px;
-}
 `
 
 export const Paragraf = styled.p`
