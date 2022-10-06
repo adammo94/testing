@@ -7,7 +7,10 @@ export default function Component() {
   const router = useRouter()
   return (
     <>
-      <Button onClick={() => session ? signOut() : router.push('/login')}>
+      <Button 
+      variant="contained"
+      onClick={() => session ? signOut() : router.push('/login')}
+      >
         {session ? 'Sign out' : 'Sign in'}
       </Button>
     </>

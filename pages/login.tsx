@@ -1,13 +1,8 @@
 import { getProviders } from 'next-auth/react'
 import React from 'react'
-import { LoginPage } from 'views/LoginPage'
-import { LoginProps } from 'views/LoginPage/LoginPage'
+import { Login, LoginProps } from 'views/Login/Login'
 
-function Login({ providers }: LoginProps) {
-  return (
-    <LoginPage providers={ providers }/>
-  )
-}
+const LoginPage = ({ providers }: LoginProps) => <Login providers={providers} />
 
 export async function getServerSideProps() {
   const providers = await getProviders()
@@ -16,4 +11,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default Login
+export default LoginPage

@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { addDoc, collection } from 'firebase/firestore';
 import { useRouter } from 'next/router'
 import { Button, TextField } from '@mui/material';
-import { Wrapper } from './FinalizePage.styles';
+import { Wrapper } from './Finalize.styles';
 import { db } from '../../firebase/config';
 import { useSession } from 'next-auth/react';
 
@@ -18,7 +18,7 @@ type Inputs = {
 };
 
 
-export function FinalizePage() {
+export function Finalize() {
   const router = useRouter()
   const { data: session } = useSession()
 

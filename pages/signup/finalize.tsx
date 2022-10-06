@@ -1,10 +1,6 @@
 import React from 'react'
-import { FinalizePage } from 'views/FinalizePage'
+import { Finalize } from 'views/Finalize'
 
-function Finalize() {
-  return (
-    <FinalizePage />
-  )
-}
-
-export default Finalize
+const FinalizePage = () => <Finalize />
+  
+export default FinalizePage

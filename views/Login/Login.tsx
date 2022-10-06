@@ -1,17 +1,17 @@
-import { Button } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { db } from "../../firebase/config"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { AppProviders } from "next-auth/providers"
 import { getProviders, signIn, signOut, useSession } from "next-auth/react"
 import { useRouter } from 'next/router'
 import { useEffect } from "react"
-import { Paragraf, Window, Wrapper } from "./LoginPage.styles"
+import { Card, Wrapper } from "./Login.styles"
 
 export type LoginProps = {
   providers: AppProviders
 }
 
-export function LoginPage({ providers }: LoginProps) {
+export function Login({ providers }: LoginProps) {
   const { data: session } = useSession()
   const router = useRouter()
 
@@ -33,11 +33,14 @@ export function LoginPage({ providers }: LoginProps) {
 
   return (
     <Wrapper>
-      <Window>
-        <Paragraf>Sign in with:</Paragraf>
+      <Card>
+        <Typography
+          variant="h5"
+        >Sign in with:
+        </Typography>
         {Object.values(providers).map((provider) => (
           <Button
-          size={"large"}
+            size={"large"}
             variant="contained"
             key={provider.name}
             onClick={() => signIn(provider.id)}
@@ -45,7 +48,7 @@ export function LoginPage({ providers }: LoginProps) {
             {provider.name}
           </Button>
         ))}
-      </Window>
+      </Card>
     </Wrapper>
   )
 }
