@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@hookform/resolvers": "^2.9.8",
     "@mui/material": "^5.10.7",
     "@reduxjs/toolkit": "^1.8.5",
     "@types/next-redux-wrapper": "^3.0.0",
@@ -23,9 +24,11 @@
     "next-auth": "^4.12.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.36.1",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
+    "yup": "^0.32.11"
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "eslint-config-airbnb": "^19.0.4",
