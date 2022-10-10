@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.form`
   display: flex;
@@ -8,4 +8,4 @@ export const Wrapper = styled.form`
   input {
     font-size: 2rem;
   }
-`
+`;

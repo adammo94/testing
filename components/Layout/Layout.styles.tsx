@@ -1,5 +1,4 @@
-import { autocompleteClasses } from "@mui/material";
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -10,7 +9,7 @@ export const Wrapper = styled.div`
   padding: 32px;
   background: rgb(238,174,202);
   background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-`
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -20,4 +19,4 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 1440px;
   width: 100%;
-`
+`;

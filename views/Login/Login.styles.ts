@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   height: 100%;
   width: 100%;
   flex: 1;
-`
+`;
 
 export const Card = styled.div`
   text-align: center;
@@ -27,4 +27,4 @@ export const Card = styled.div`
   font-size: 28px;
 }
   }
-`
+`;

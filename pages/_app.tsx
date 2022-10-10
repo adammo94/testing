@@ -1,20 +1,26 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
-import { wrapper } from '../store/store';
 import { Session } from 'next-auth';
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from 'next-auth/react';
 import GlobalStyle from 'globalstyles/globalstyles';
 import { Layout } from 'components/Layout';
+import UserInitializer from 'components/UserInitializer/UserInitializer';
 
-const MyApp = ({
+import { wrapper } from '../store/store';
+
+function MyApp({
   Component,
-  pageProps: { session, ...rest }
-}: AppProps<{ session: Session }>) => {
+  pageProps: {
+    session, ...rest
+  },
+}: AppProps<{ session: Session }>) {
   const { store } = wrapper.useWrappedStore(rest);
+
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
+        <UserInitializer />
         <GlobalStyle />
         <Layout>
           <Component {...rest} />
@@ -22,6 +28,6 @@ const MyApp = ({
       </Provider>
     </SessionProvider>
   );
-};
+}
 
 export default MyApp;

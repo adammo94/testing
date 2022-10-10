@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -9,8 +9,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: #fff;
-    font-family: 'Roboto', sans-serif;
+    font-family: Roboto, sans-serif;
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
