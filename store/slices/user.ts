@@ -5,6 +5,7 @@ import {
   collection, getDocs, query, where,
 } from '@firebase/firestore';
 import { differenceInDays } from 'date-fns';
+import { AppState } from 'store/store';
 
 import { db } from '../../firebase/config';
 
@@ -94,5 +95,7 @@ export const userSlice = createSlice({
   name: 'user',
   reducers: {},
 });
+
+export const userSelector = (state: AppState) => state.user?.user;
 
 export default userSlice.reducer;
