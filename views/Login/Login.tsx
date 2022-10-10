@@ -10,8 +10,6 @@ import {
 } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getUserData } from 'store/slices/user';
 
 import {
   Card, Wrapper,
@@ -25,7 +23,6 @@ export type LoginProps = {
 export function Login({ providers }: LoginProps) {
   const { data: session } = useSession();
   const router = useRouter();
-  const dispatch = useDispatch<any>();
 
   const handleSession = async () => {
     const q = query(collection(db, 'users'), where('email', '==', session?.user?.email));
@@ -34,7 +31,6 @@ export function Login({ providers }: LoginProps) {
     if (docs.docs.length === 0) {
       router.push('/signup/finalize');
     } else {
-      await dispatch(getUserData(session?.user?.email as string));
       router.push('/');
     }
   };
