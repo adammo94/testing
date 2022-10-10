@@ -1,46 +1,61 @@
-import { Button, Typography } from "@mui/material"
-import { db } from "../../firebase/config"
-import { collection, getDocs, query, where } from "firebase/firestore"
-import { AppProviders } from "next-auth/providers"
-import { getProviders, signIn, signOut, useSession } from "next-auth/react"
-import { useRouter } from 'next/router'
-import { useEffect } from "react"
-import { Card, Wrapper } from "./Login.styles"
+import {
+  Button, Typography,
+} from '@mui/material';
+import {
+  collection, getDocs, query, where,
+} from 'firebase/firestore';
+import { AppProviders } from 'next-auth/providers';
+import {
+  signIn, useSession,
+} from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getUserData } from 'store/slices/user';
+
+import {
+  Card, Wrapper,
+} from './Login.styles';
+import { db } from '../../firebase/config';
 
 export type LoginProps = {
-  providers: AppProviders
+  providers: AppProviders;
 }
 
 export function Login({ providers }: LoginProps) {
-  const { data: session } = useSession()
-  const router = useRouter()
+  const { data: session } = useSession();
+  const router = useRouter();
+  const dispatch = useDispatch<any>();
 
   const handleSession = async () => {
-    const q = query(collection(db, "users"), where("email", "==", session?.user?.email));
+    const q = query(collection(db, 'users'), where('email', '==', session?.user?.email));
     const docs = await getDocs(q);
+
     if (docs.docs.length === 0) {
-      router.push('/signup/finalize')
+      router.push('/signup/finalize');
     } else {
-      router.push('/')
+      await dispatch(getUserData(session?.user?.email as string));
+      router.push('/');
     }
-  }
+  };
 
   useEffect(() => {
     if (session) {
-      handleSession()
+      handleSession();
     }
-  }, [session])
+  }, [session]);
 
   return (
     <Wrapper>
       <Card>
         <Typography
           variant="h5"
-        >Sign in with:
+        >
+          Sign in with:
         </Typography>
-        {Object.values(providers).map((provider) => (
+        {Object.values(providers).map(provider => (
           <Button
-            size={"large"}
+            size="large"
             variant="contained"
             key={provider.name}
             onClick={() => signIn(provider.id)}
@@ -50,6 +65,6 @@ export function Login({ providers }: LoginProps) {
         ))}
       </Card>
     </Wrapper>
-  )
+  );
 }
 
