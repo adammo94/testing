@@ -1,3 +1,4 @@
+import { Navbar } from 'components/Navbar';
 import React from 'react';
 
 import {
@@ -11,6 +12,7 @@ type LayoutProps = {
 export function Layout({ children }: LayoutProps) {
   return (
     <Wrapper>
+      <Navbar />
       <Container>
         {children}
       </Container>

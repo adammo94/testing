@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import {
-  signOut, useSession,
+  useSession,
 } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
@@ -8,12 +8,16 @@ export default function Component() {
   const { data: session } = useSession();
   const router = useRouter();
 
+  if (session) {
+    return <> </>;
+  }
+
   return (
     <Button
       variant="contained"
-      onClick={() => (session ? signOut() : router.push('/login'))}
+      onClick={() => (router.push('/login'))}
     >
-      {session ? 'Sign out' : 'Sign in'}
+      Sign in
     </Button>
   );
 }
