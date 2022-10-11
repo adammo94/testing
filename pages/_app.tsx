@@ -6,6 +6,7 @@ import { SessionProvider } from 'next-auth/react';
 import GlobalStyle from 'globalstyles/globalstyles';
 import { Layout } from 'components/Layout';
 import UserInitializer from 'components/UserInitializer/UserInitializer';
+import ResponsiveAppBar from 'components/Navbar/Navbar';
 
 import { wrapper } from '../store/store';
 
@@ -22,9 +23,11 @@ function MyApp({
       <Provider store={store}>
         <UserInitializer />
         <GlobalStyle />
-        <Layout>
-          <Component {...rest} />
-        </Layout>
+        <ResponsiveAppBar>
+          <Layout>
+            <Component {...rest} />
+          </Layout>
+        </ResponsiveAppBar>
       </Provider>
     </SessionProvider>
   );
