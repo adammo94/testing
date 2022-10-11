@@ -8,25 +8,20 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {
   signOut, useSession,
 } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-const pages = ['Home'];
-
-const settings = [
-  'Logout',
-  'Profile',
+const pages = [
+  {
+    name: 'Home',
+    path: '/',
+  },
 ];
 
-type NavbarProps = {
-  children: React.ReactNode;
-}
-
-function Navbar({ children }: NavbarProps) {
+export function Navbar() {
   const [
     anchorElNav,
     setAnchorElNav,
@@ -54,181 +49,109 @@ function Navbar({ children }: NavbarProps) {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const handleSettingClick = (setting: string) => {
-    if (setting === 'Logout') {
-      signOut();
-      router.push('/');
-    } else if (setting === 'Profile') {
-      handleCloseUserMenu();
-      router.push('/profile');
-    }
-  };
-
-  const handlePageClick = (page: string) => {
-    if (page === 'Home') {
-      handleCloseNavMenu();
-      router.push('/');
-    }
-  };
-
   return (
-    <>
-      <AppBar position="sticky">
-        <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                color: 'inherit',
-                display: {
-                  md: 'flex',
-                  xs: 'none',
-                },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                mr: 2,
-                textDecoration: 'none',
-              }}
-            >
-              HOME
-            </Typography>
-            <Box sx={{
-              display: {
-                md: 'none',
-                xs: 'flex',
-              },
-              flexGrow: 1,
-            }}
-            >
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  horizontal: 'left',
-                  vertical: 'bottom',
-                }}
-                keepMounted
-                transformOrigin={{
-                  horizontal: 'left',
-                  vertical: 'top',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: {
-                    md: 'none',
-                    xs: 'block',
-                  },
-                }}
-              >
-                {pages.map(page => (
-                  <MenuItem
-                    key={page}
-                    onClick={() => handlePageClick(page)}
-                  >
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <Box sx={{
-              display: {
-                md: 'none',
-                xs: 'flex',
-              },
-              flexGrow: 1,
-            }}
-            >
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  horizontal: 'left',
-                  vertical: 'bottom',
-                }}
-                keepMounted
-                transformOrigin={{
-                  horizontal: 'left',
-                  vertical: 'top',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: {
-                    md: 'none',
-                    xs: 'block',
-                  },
-                }}
-              />
-            </Box>
-            <Box sx={{
+    <AppBar position="fixed">
+      <Container maxWidth="lg">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            onClick={() => router.push('/')}
+            sx={{
+              cursor: 'pointer',
               display: {
                 md: 'flex',
                 xs: 'none',
               },
-              flexGrow: 1,
             }}
-            />
-            {session && (
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton
-                    onClick={handleOpenUserMenu}
-                    sx={{ p: 0 }}
-                  >
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={session.user?.image as string}
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: '45px' }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    horizontal: 'right',
-                    vertical: 'top',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    horizontal: 'right',
-                    vertical: 'top',
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
+          >
+            HOME
+          </Typography>
+          <Box sx={{
+            display: {
+              md: 'none',
+              xs: 'flex',
+            },
+            flexGrow: 1,
+          }}
+          >
+            <IconButton
+              size="large"
+              onClick={handleOpenNavMenu}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              onClick={handleCloseNavMenu}
+              anchorEl={anchorElNav}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: {
+                  md: 'none',
+                  xs: 'block',
+                },
+              }}
+            >
+              {pages.map(({
+                path, name,
+              }) => (
+                <MenuItem
+                  key={path}
+                  onClick={() => router.push(path)}
                 >
-                  {settings.map(setting => (
-                    <MenuItem
-                      key={setting}
-                      onClick={() => handleSettingClick(setting)}
-                    >
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            )}
-          </Toolbar>
-        </Container>
-      </AppBar>
-      {children}
-    </>
+                  <Typography>{name}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Box sx={{
+            display: {
+              md: 'flex',
+              xs: 'none',
+            },
+            flexGrow: 1,
+          }}
+          />
+          {session && (
+            <Box>
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0 }}
+              >
+                <Avatar
+                  alt="User Icon"
+                  src={session.user?.image as string}
+                />
+              </IconButton>
+              <Menu
+                anchorEl={anchorElUser}
+                open={!!anchorElUser}
+                onClose={handleCloseUserMenu}
+                onClick={handleCloseUserMenu}
+              >
+                <MenuItem>
+                  <Typography
+                    onClick={() => {
+                      signOut();
+                      router.push('/');
+                    }}
+                  >
+                    Logout
+                  </Typography>
+                </MenuItem>
+                <MenuItem>
+                  <Typography
+                    onClick={() => router.push('/profile')}
+                  >
+                    Profile
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
 
-export default Navbar;

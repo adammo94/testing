@@ -1,4 +1,4 @@
-import Navbar from 'components/Navbar/Navbar';
+import { Navbar } from 'components/Navbar';
 import React from 'react';
 
 import {
@@ -11,12 +11,11 @@ type LayoutProps = {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <Navbar>
-      <Wrapper>
-        <Container>
-          {children}
-        </Container>
-      </Wrapper>
-    </Navbar>
+    <Wrapper>
+      <Navbar />
+      <Container>
+        {children}
+      </Container>
+    </Wrapper>
   );
 }
