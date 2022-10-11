@@ -7,7 +7,7 @@ import {
   getUserData, userSelector,
 } from 'store/slices/user';
 
-function UserInitializer() {
+export function UserInitializer() {
   const { data: session } = useSession();
   const dispatch = useDispatch<any>();
   const user = useSelector(userSelector);
@@ -32,4 +32,3 @@ function UserInitializer() {
   );
 }
 
-export default UserInitializer;

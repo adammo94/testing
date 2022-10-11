@@ -5,7 +5,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import GlobalStyle from 'globalstyles/globalstyles';
 import { Layout } from 'components/Layout';
-import UserInitializer from 'components/UserInitializer/UserInitializer';
+import { UserInitializer } from 'components/UserInitializer';
 
 import { wrapper } from '../store/store';
 
