@@ -1,10 +1,9 @@
+import { Typography } from '@mui/material';
 import React from 'react';
-
-import { SubtitleH5 } from './Profile.styles';
 
 export function Profile() {
   return (
-    <SubtitleH5>profile page</SubtitleH5>
+    <Typography variant="h5">Profile page</Typography>
   );
 }
 

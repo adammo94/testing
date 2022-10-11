@@ -26,7 +26,7 @@ type NavbarProps = {
   children: React.ReactNode;
 }
 
-function ResponsiveAppBar({ children }: NavbarProps) {
+function Navbar({ children }: NavbarProps) {
   const [
     anchorElNav,
     setAnchorElNav,
@@ -231,4 +231,4 @@ function ResponsiveAppBar({ children }: NavbarProps) {
   );
 }
 
-export default ResponsiveAppBar;
+export default Navbar;
