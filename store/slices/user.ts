@@ -4,7 +4,9 @@ import {
 import {
   collection, getDocs, query, where,
 } from '@firebase/firestore';
-import { differenceInDays } from 'date-fns';
+import {
+  differenceInDays, differenceInMonths, differenceInYears,
+} from 'date-fns';
 import { AppState } from 'store/store';
 
 import { db } from '../../firebase/config';
@@ -51,34 +53,33 @@ const initialState: InitialStateType = {
   user: null,
 };
 
-const handleSignUpDateDiff = (days: number) => {
-  if (days < 1) {
-    return 'less than one day';
+const handleSignUpDateDiff = (timestamp: number) => {
+  const days = differenceInDays(Date.now(), timestamp);
+  const months = differenceInMonths(Date.now(), timestamp);
+  const years = differenceInYears(Date.now(), timestamp);
+
+  if (years) {
+    return `${years} ${years === 1 ? 'year' : 'years'}`;
   }
 
-  if (days < 31) {
+  if (months) {
+    return `${months} ${months === 1 ? 'month' : 'months'}`;
+  }
+
+  if (days) {
     return `${days} ${days === 1 ? 'day' : 'days'}`;
   }
 
-  if (days < 365) {
-    const months = Math.floor(days / 30);
-
-    return `${months} ${months === 1 ? 'month' : 'months'}`;
-  }
-  const years = Math.floor(days / 365);
-
-  return `${years} ${years === 1 ? 'year' : 'years'}`;
+  return 'less than one day';
 };
 
 export const userSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getUserData.fulfilled, (state, action) => {
-        const dateInDays = differenceInDays(Date.now(), action.payload.signUpDate);
-
         state.user = ({
           ...action.payload,
-          signUpDate: handleSignUpDateDiff(dateInDays),
+          signUpDate: handleSignUpDateDiff(action.payload.signUpDate),
         });
         state.loading.user = false;
       })

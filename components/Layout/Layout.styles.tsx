@@ -19,4 +19,5 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 1440px;
   width: 100%;
+  padding-top: 80px;
 `;
