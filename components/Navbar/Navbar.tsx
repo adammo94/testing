@@ -14,6 +14,9 @@ import {
   signOut, useSession,
 } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import PersonIcon from '@mui/icons-material/Person';
+
+import { SignInButton } from './Navbar.styles';
 
 const pages = ['Home'];
 
@@ -82,6 +85,9 @@ function Navbar({ children }: NavbarProps) {
               component="a"
               href="/"
               sx={{
+                ':hover': {
+                  color: '#f1f1f1',
+                },
                 color: 'inherit',
                 display: {
                   md: 'flex',
@@ -183,46 +189,62 @@ function Navbar({ children }: NavbarProps) {
               flexGrow: 1,
             }}
             />
-            {session && (
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton
-                    onClick={handleOpenUserMenu}
-                    sx={{ p: 0 }}
-                  >
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={session.user?.image as string}
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: '45px' }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    horizontal: 'right',
-                    vertical: 'top',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    horizontal: 'right',
-                    vertical: 'top',
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map(setting => (
-                    <MenuItem
-                      key={setting}
-                      onClick={() => handleSettingClick(setting)}
+            {session ?
+              (
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title="Open settings">
+                    <IconButton
+                      onClick={handleOpenUserMenu}
+                      sx={{ p: 0 }}
                     >
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            )}
+                      <Avatar
+                        alt="Remy Sharp"
+                        src={session.user?.image as string}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      horizontal: 'right',
+                      vertical: 'top',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      horizontal: 'right',
+                      vertical: 'top',
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map(setting => (
+                      <MenuItem
+                        key={setting}
+                        onClick={() => handleSettingClick(setting)}
+                      >
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              ) :
+              (
+                <SignInButton
+                  sx={{
+                    ':hover': {
+                      bgcolor: '#f1f1f1',
+                    },
+                  }}
+                  variant="contained"
+                  color="success"
+                  startIcon={<PersonIcon />}
+                  onClick={() => router.push('/login')}
+                >
+                  Sign in
+                </SignInButton>
+              )}
           </Toolbar>
         </Container>
       </AppBar>
