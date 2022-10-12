@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUserData } from 'store/slices/user';
+import Image from 'next/image';
 
 import {
   Card, Wrapper,
@@ -48,6 +49,12 @@ export function Login({ providers }: LoginProps) {
   return (
     <Wrapper>
       <Card>
+        <Image
+          src="/images/undraw_pic_profile_re_1865.svg"
+          alt="man"
+          width="100px"
+          height="100px"
+        />
         <Typography
           variant="h5"
         >
