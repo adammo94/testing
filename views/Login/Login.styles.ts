@@ -10,7 +10,16 @@ export const Wrapper = styled.div`
   flex: 1;
 `;
 
+export const Line = styled.div`
+position: absolute;
+transform: rotate(-45deg) translateY(90px);
+  width: 100%;
+  height: 20px;
+  background-color: rgba(24,118,209, 0.5);
+`;
+
 export const Card = styled.div`
+overflow: hidden;
   text-align: center;
   width: 100%;
   max-width: 500px;

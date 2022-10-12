@@ -15,7 +15,7 @@ import { getUserData } from 'store/slices/user';
 import Image from 'next/image';
 
 import {
-  Card, Wrapper,
+  Card, Line, Wrapper,
 } from './Login.styles';
 import { db } from '../../firebase/config';
 
@@ -70,6 +70,7 @@ export function Login({ providers }: LoginProps) {
             {provider.name}
           </Button>
         ))}
+        <Line />
       </Card>
     </Wrapper>
   );
