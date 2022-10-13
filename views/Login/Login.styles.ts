@@ -31,7 +31,6 @@ overflow: hidden;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
 
   img {
-    top: 0;
     animation: test2 4s ease-out infinite;
     
     @keyframes test2 {
