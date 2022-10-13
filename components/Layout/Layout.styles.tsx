@@ -7,8 +7,7 @@ export const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   padding: 32px;
-  background: rgb(238,174,202);
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  background-color: #f1f1f1;
 `;
 
 export const Container = styled.div`
@@ -21,3 +20,4 @@ export const Container = styled.div`
   width: 100%;
   padding-top: 80px;
 `;
+
