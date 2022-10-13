@@ -2,18 +2,21 @@ import { Navbar } from 'components/Navbar';
 import React from 'react';
 
 import {
-  Container, Wrapper,
+  Container, LayoutVariantsEnum, Wrapper,
 } from './Layout.styles';
 
-type LayoutProps = {
+export type LayoutProps = {
   children: React.ReactNode;
+  variant?: LayoutVariantsEnum;
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({
+  children, variant,
+}: LayoutProps) {
   return (
     <Wrapper>
       <Navbar />
-      <Container>
+      <Container variant={variant}>
         {children}
       </Container>
     </Wrapper>
