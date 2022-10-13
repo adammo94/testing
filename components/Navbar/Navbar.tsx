@@ -13,6 +13,9 @@ import {
   signOut, useSession,
 } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import PersonIcon from '@mui/icons-material/Person';
+
+import { SignInButton } from './Navbar.styles';
 
 const pages = [
   {
@@ -57,6 +60,9 @@ export function Navbar() {
             variant="h6"
             onClick={() => router.push('/')}
             sx={{
+              '&:hover': {
+                color: '#f1f1f1',
+              },
               cursor: 'pointer',
               display: {
                 md: 'flex',
@@ -112,43 +118,58 @@ export function Navbar() {
             flexGrow: 1,
           }}
           />
-          {session && (
-            <Box>
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0 }}
+          {session ?
+            (
+              <Box>
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}
+                >
+                  <Avatar
+                    alt="User Icon"
+                    src={session.user?.image as string}
+                  />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorElUser}
+                  open={!!anchorElUser}
+                  onClose={handleCloseUserMenu}
+                  onClick={handleCloseUserMenu}
+                >
+                  <MenuItem>
+                    <Typography
+                      onClick={() => {
+                        signOut();
+                        router.push('/');
+                      }}
+                    >
+                      Logout
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography
+                      onClick={() => router.push('/profile')}
+                    >
+                      Profile
+                    </Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            ) :
+            (
+              <SignInButton
+                variant="contained"
+                startIcon={<PersonIcon />}
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#f1f1f1',
+                  },
+                }}
+                onClick={() => router.push('/login')}
               >
-                <Avatar
-                  alt="User Icon"
-                  src={session.user?.image as string}
-                />
-              </IconButton>
-              <Menu
-                anchorEl={anchorElUser}
-                open={!!anchorElUser}
-                onClose={handleCloseUserMenu}
-                onClick={handleCloseUserMenu}
-              >
-                <MenuItem>
-                  <Typography
-                    onClick={() => {
-                      signOut();
-                      router.push('/');
-                    }}
-                  >
-                    Logout
-                  </Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography
-                    onClick={() => router.push('/profile')}
-                  >
-                    Profile
-                  </Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
-          )}
+                sign in
+              </SignInButton>
+            )}
         </Toolbar>
       </Container>
     </AppBar>
