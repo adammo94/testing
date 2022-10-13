@@ -5,6 +5,7 @@ import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import GlobalStyle from 'globalstyles/globalstyles';
 import { UserInitializer } from 'components/UserInitializer';
+import { Layout } from 'components/Layout';
 
 import { wrapper } from '../store/store';
 
@@ -21,7 +22,9 @@ function MyApp({
       <Provider store={store}>
         <UserInitializer />
         <GlobalStyle />
-        <Component {...rest} />
+        <Layout>
+          <Component {...rest} />
+        </Layout>
       </Provider>
     </SessionProvider>
   );
